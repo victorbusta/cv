@@ -1,0 +1,114 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+margin: 0;
+    background: rgb(0,34,42);
+    background: linear-gradient(90deg, rgba(0,34,42,1) 0%, rgba(0,81,99,1) 35%, rgba(0,81,99,1) 59%, rgba(0,34,42,1) 100%);
+}
+
+header {
+    margin: 0;
+    min-width: 700px;
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    height: 100%;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    overflow: auto;
+}
+
+.half {
+    width: 45%;
+    padding: 2,5%;
+    float: left;
+}
+
+.third {
+    width: 29%;
+    padding: 2%;
+    float: left;
+}
+
+.third2 {
+    width: 61%;
+    padding: 2.5%;
+    float: right;
+}
+
+.quarter {
+    width: 21%;
+    padding: 2%;
+    float: left;
+}
+
+.center {
+    text-align: center;
+    padding: 2px 0 2px 0;
+}
+
+.experiences img {
+    max-width: 100px;
+    height: auto;
+}
+
+#hobbies img {
+    max-width: 80%;
+    height: auto;
+}
+
+#hobbies .quarter {
+    font-size: 0.7em;
+}
+
+.borderComp {
+    border: 1px #eeeeee solid;
+    top: 7px;
+    position: relative;
+    border-radius: 5px;
+    width: 65%;
+    float: right;
+    height: 20px;
+    margin: auto;
+}
+
+.barComp {
+    background: rgb(0,34,42);
+    background: linear-gradient(90deg, rgba(0,34,42,1) 0%, rgba(0,81,99,1) 35%, rgba(0,81,99,1) 59%, rgba(0,34,42,1) 100%);
+    border-radius: 5px;
+    height: 16px;
+    margin: 2px;
+}
+.comp {
+    overflow: auto;
+    height: 50px;
+}
+
+.comp img {
+    width: 30%;
+    max-width: 50px;
+    max-height: 40px;
+    width: auto;
+    height: auto;
+    float: left;
+}
+
+#download {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.5);
+    text-align: center;
+}
+
+#download img{
+ width: 50px;
+ margin-top: 25px;
+}
