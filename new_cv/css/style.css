@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'medio'; 
+    src: url("../assets/medio.otf") format("opentype");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'gentium_book_plus'; 
+    src: url("../assets/Gentium_Book_Plus/GentiumBookPlus-Regular.ttf") format("opentype");
+    font-style: normal;
+}
+@font-face {
+    font-family: 'gentium_book_plus-Bold'; 
+    src: url("../assets/Gentium_Book_Plus/GentiumBookPlus-Bold.ttf") format("opentype");
+    font-style: normal;
+}
+@font-face {
+    font-family: 'gentium_book_plus-Italic'; 
+    src: url("../assets/Gentium_Book_Plus/GentiumBookPlus-Italic.ttf") format("opentype");
+    font-style: normal;
+}
+@font-face {
+    font-family: 'gentium_book_plus-BoldItalic'; 
+    src: url("../assets/Gentium_Book_Plus/GentiumBookPlus-BoldItalic.ttf") format("opentype");
+    font-style: normal;
+}
+
+body{
+    margin: 0;
+    background-color: #2A2D34;
+    height: 4000px;
+}
+
+nav{
+    position: fixed;
+    width: 100%;
+
+}
+
+#profile {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    filter: drop-shadow(rgba(0, 0, 0, 0.500) 1.95px 1.95px 2.6px)
+}
+
+#navbar {
+    position: absolute;
+    width: 100%;
+    height: 35px;
+    background-color: #8D86C9;
+    box-shadow: rgba(0, 0, 0, 0.500) 1.95px 1.95px 2.6px;
+}
+
+/*  
+    #2A2D34  
+    #8D86C9
+    #CAC4CE
+*/
