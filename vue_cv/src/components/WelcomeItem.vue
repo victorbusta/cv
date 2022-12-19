@@ -1,60 +1,99 @@
 <script setup lang="ts">
-// import $ from "jquery";
+import * as $ from "jquery";
+import { watch } from "vue";
 
-// const spin = async (event: any) => {
-//   console.log(event.srcElement);
+var opened = 0;
+var iconElement = new EventTarget();
+var titleElement = new EventTarget();
 
-//   $(event.srcElement).addClass("spin");
-//   await delay(1000);
-//   $(event.srcElement).removeClass("spin");
-// };
+watch($(window).width(), (window) => {
+  if ($(window).width() < 1024) {
+    $("h3").animate({
+      opacity: "1",
+    });
+  }
+});
 
-// function delay(ms: number) {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// }
+const hoveringIcon = (event: Event) => {
+  if (
+    opened === 0 &&
+    event.currentTarget !== null &&
+    $(window).width() > 1024
+  ) {
+    opened = 1;
+    iconElement = $(event.target).children(".item");
+    titleElement = $(iconElement).prev();
+
+    $(iconElement).animate({
+      left: "10rem",
+    });
+    $(titleElement).animate({
+      opacity: "1",
+    });
+  }
+};
+
+const exitingCard = (event: Event) => {
+  if (
+    opened === 1 &&
+    event.currentTarget !== null &&
+    $(window).width() > 1024
+  ) {
+    opened = 0;
+    $(iconElement).animate({
+      left: "0rem",
+    });
+    $(titleElement).animate({
+      opacity: "0",
+    });
+  }
+};
 </script>
 
 <template>
-  <div class="item">
-    <i>
-      <!-- <i @click="spin($event)"> -->
-      <slot name="icon"></slot>
-    </i>
-    <div class="details">
-      <h3>
-        <slot name="heading"></slot>
-      </h3>
-      <slot></slot>
+  <div
+    class="hole"
+    @mouseleave="exitingCard($event)"
+    @mouseover="hoveringIcon($event)"
+  >
+    <h3>
+      <slot name="heading" ref="heading"></slot>
+    </h3>
+    <div class="item">
+      <i>
+        <slot name="icon"></slot>
+      </i>
+      <div class="details">
+        <p>
+          <slot name="content"></slot>
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.item {
-  margin-top: 2rem;
+.hole {
+  width: calc((100vw / 2) - 2rem);
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.item {
+  margin: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .details {
   flex: 1;
   margin-left: 1rem;
-}
-
-@keyframes spin3D {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
-}
-
-.spin {
-  animation-name: spin3D;
-  animation-duration: 1s;
-  animation-iteration-count: 7;
-  /* linear | ease | ease-in | ease-out | ease-in-out */
-  animation-timing-function: ease-in-out;
+  transition: all 1.5 ease;
 }
 
 i {
@@ -63,33 +102,51 @@ i {
   place-content: center;
   width: 32px;
   height: 32px;
-
   color: var(--color-text);
 }
 
 h3 {
+  position: relative;
   font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: 0.4rem;
   color: var(--color-heading);
+  opacity: 1;
+}
+
+p {
+  display: none;
 }
 
 @media (min-width: 1024px) {
-  .item {
-    margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
+  .hole {
+    width: calc((100vw / 2) - 2rem);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
   }
-
-  i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
+  .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
     border: 1px solid var(--color-border);
     background: var(--color-background);
     border-radius: 8px;
-    width: 50px;
-    height: 50px;
-    filter: drop-shadow(0 0 0.5rem #000000);
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 0 0.2rem #000000);
+  }
+
+  i {
+    width: 100px;
+    height: 100px;
+  }
+
+  h3 {
+    position: absolute;
+    opacity: 0;
   }
 }
 </style>

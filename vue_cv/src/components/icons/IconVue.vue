@@ -3,8 +3,8 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 48 48"
-    width="30px"
-    height="30px"
+    width="75px"
+    height="75px"
   >
     <g id="surface113326596">
       <path

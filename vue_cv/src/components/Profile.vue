@@ -124,6 +124,10 @@ h2 {
   margin: 0 2rem 0 2rem;
 }
 
+.spin {
+  transform: rotateY(360deg);
+}
+
 @media (min-width: 1024px) {
   .greetings h1,
   .greetings h2 {

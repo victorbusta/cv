@@ -3,15 +3,7 @@ import { RouterLink, RouterView } from "vue-router";
 import Profile from "./components/Profile.vue";
 import $ from "jquery";
 
-const spin = async () => {
-  $(".logo").addClass("spin");
-  await delay(1000);
-  $(".logo").removeClass("spin");
-};
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+const spin = async () => $(".logo").toggleClass("spin");
 </script>
 
 <template>
@@ -30,7 +22,7 @@ function delay(ms: number) {
 
       <nav>
         <RouterLink to="/">Technologies</RouterLink>
-        <RouterLink to="/about">A propos</RouterLink>
+        <!-- <RouterLink to="/about">A propos</RouterLink> -->
       </nav>
     </div>
   </header>
@@ -44,11 +36,14 @@ header {
   line-height: 1.5;
   max-height: 100vh;
   text-align: center;
-  filter: drop-shadow(0 0 0.5rem #000000);
+  filter: drop-shadow(0 0 0.2rem #000000);
 }
 
-main {
-  /* position: relative; */
+.corner {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  rotate: 90deg;
 }
 
 .logo {

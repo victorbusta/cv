@@ -1,0 +1,31 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  version="1.1"
+  width="50px"
+  height="50px"
+  viewBox="0 0 640 480"
+  xml:space="preserve"
+>
+  <desc>Created with Fabric.js 3.6.6</desc>
+  <defs></defs>
+  <g transform="matrix(1 0 0 1 309.5 231.67)">
+    <path
+      style="
+        stroke: rgb(0, 0, 0);
+        stroke-width: 2;
+        stroke-dasharray: none;
+        stroke-linecap: butt;
+        stroke-dashoffset: 0;
+        stroke-linejoin: miter;
+        stroke-miterlimit: 4;
+        fill: rgb(42, 45, 52);
+        fill-rule: nonzero;
+        opacity: 1;
+      "
+      transform=" translate(-269.5, -217)"
+      d="M 145.5 95 Q 195.5 225 143.5 339 Q 283.5 287 395.5 334 Q 348.5 146 145.5 95"
+      stroke-linecap="round"
+    />
+  </g>
+</svg>
