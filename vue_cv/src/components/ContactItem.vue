@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as $ from "jquery";
+import $ from "jquery";
 
 var opened = 0;
 var iconElement = new EventTarget();

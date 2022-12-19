@@ -1,4 +1,3 @@
-<!-- eslint-disable prettier/prettier -->
 <script setup lang="ts">
 import WelcomeItem from "./WelcomeItem.vue";
 import DevopsIcon from "./icons/IconDevops.vue";

@@ -1,32 +1,22 @@
 <script setup lang="ts">
-import * as $ from "jquery";
+import $ from "jquery";
 import { watch } from "vue";
 
 var opened = 0;
 var iconElement = new EventTarget();
 var titleElement = new EventTarget();
 
-watch($(window).width(), (window) => {
-  if ($(window).width() < 1024) {
-    $("h3").animate({
-      opacity: "1",
-    });
-  }
-});
-
 const hoveringIcon = (event: Event) => {
-  if (
-    opened === 0 &&
-    event.currentTarget !== null &&
-    $(window).width() > 1024
-  ) {
+  if (opened === 0 && event.currentTarget !== null) {
     opened = 1;
     iconElement = $(event.target).children(".item");
     titleElement = $(iconElement).prev();
 
-    $(iconElement).animate({
-      left: "10rem",
-    });
+    if ($(window).width() > 1024)
+      $(iconElement).animate({
+        left: "10rem",
+      });
+
     $(titleElement).animate({
       opacity: "1",
     });
@@ -34,11 +24,7 @@ const hoveringIcon = (event: Event) => {
 };
 
 const exitingCard = (event: Event) => {
-  if (
-    opened === 1 &&
-    event.currentTarget !== null &&
-    $(window).width() > 1024
-  ) {
+  if (opened === 1 && event.currentTarget !== null) {
     opened = 0;
     $(iconElement).animate({
       left: "0rem",
@@ -110,7 +96,7 @@ h3 {
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--color-heading);
-  opacity: 1;
+  opacity: 0;
 }
 
 p {
