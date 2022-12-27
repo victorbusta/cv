@@ -21,8 +21,8 @@ const spin = async () => $(".logo").toggleClass("spin");
       <Profile msg="Victor Santos de Bustamante" />
 
       <nav>
-        <RouterLink to="/">Technologies</RouterLink>
-        <!-- <RouterLink to="/about">A propos</RouterLink> -->
+        <RouterLink to="/">Connaissances</RouterLink>
+        <RouterLink to="/about">Présentation</RouterLink>
       </nav>
     </div>
   </header>
@@ -101,6 +101,7 @@ nav a:first-of-type {
 @media (max-width: 1024px) {
   main {
     margin-top: 3rem;
+    width: 100%;
   }
 }
 

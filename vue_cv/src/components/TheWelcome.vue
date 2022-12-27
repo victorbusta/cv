@@ -14,6 +14,11 @@ import VueIcon from "./icons/IconVue.vue";
         <DevopsIcon />
       </template>
       <template #heading>Devops</template>
+      <template #content
+        >Il est indispensable de pouvoir assurer des tests unitaires,
+        automatiser la mise en production et soigner l'environnement de
+        developpement d'un projet.
+      </template>
     </WelcomeItem>
   </a>
 
@@ -27,6 +32,9 @@ import VueIcon from "./icons/IconVue.vue";
         <SymfonyIcon />
       </template>
       <template #heading>Symfony</template>
+      <template #content
+        >Cliquez sur cette boite pour voir un projet utilisant Symfony!
+      </template>
     </WelcomeItem>
   </a>
 
@@ -40,6 +48,9 @@ import VueIcon from "./icons/IconVue.vue";
         <TypescriptIcon />
       </template>
       <template #heading>TypeScript</template>
+      <template #content
+        >Cliquez sur cette boite pour voir un projet utilisant TypeScript!
+      </template>
     </WelcomeItem>
   </a>
 
@@ -53,14 +64,31 @@ import VueIcon from "./icons/IconVue.vue";
         <NodeIcon />
       </template>
       <template #heading>Node Js</template>
+      <template #content
+        >Cliquez sur cette boite pour voir un projet utilisant Node!
+      </template>
     </WelcomeItem>
   </a>
+
   <a class="icon" href="https://github.com/victorbusta/cv" target="_blank">
     <WelcomeItem>
       <template #icon>
         <VueIcon />
       </template>
       <template #heading>Vue</template>
+      <template #content
+        >Cliquez sur cette boite pour voir un projet utilisant Vue!
+      </template>
     </WelcomeItem>
   </a>
 </template>
+
+<style scoped>
+@media (max-width: 1024px) {
+  a {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+  }
+}
+</style>
