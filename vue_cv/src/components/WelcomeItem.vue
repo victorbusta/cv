@@ -24,7 +24,11 @@ const hoveringIcon = (event: Event) => {
 };
 
 const exitingCard = (event: Event) => {
-  if (opened === 1 && event.currentTarget !== null) {
+  if (
+    opened === 1 &&
+    event.currentTarget !== null &&
+    $(window).width() > 1024
+) {
     opened = 0;
     $(iconElement).animate({
       left: "0rem",
@@ -101,6 +105,12 @@ h3 {
 
 p {
   display: none;
+}
+
+@media (max-width: 1024px) {
+  h3 {
+    opacity: 1;
+  }
 }
 
 @media (min-width: 1024px) {
