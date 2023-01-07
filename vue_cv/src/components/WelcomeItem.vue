@@ -2,19 +2,31 @@
 import $ from "jquery";
 
 var opened = 0;
+var itemElement = new EventTarget();
 var iconElement = new EventTarget();
 var titleElement = new EventTarget();
 
 const hoveringIcon = (event: Event) => {
   if (opened === 0 && event.currentTarget !== null) {
     opened = 1;
-    iconElement = $(event.target).children(".item");
-    titleElement = $(iconElement).prev();
+    itemElement = $(event.target).children(".item");
+    iconElement = $(itemElement).children("i");
+    titleElement = $(itemElement).prev();
 
-    if ($(window).width() > 1024)
-      $(iconElement).animate({
-        left: "10rem",
+    if ($(window).width() > 1024) {
+      // $(".item").animate({
+      //   height: "50px",
+      // });
+
+      $(itemElement).animate({
+        width: "100%",
+        // height: "300px",
       });
+
+      $(iconElement).animate({
+        right: "10rem",
+      });
+    }
 
     $(titleElement).animate({
       opacity: "1",
@@ -29,9 +41,19 @@ const exitingCard = (event: Event) => {
     $(window).width() > 1024
   ) {
     opened = 0;
-    $(iconElement).animate({
-      left: "0rem",
+    // $(".item").animate({
+    //   height: "100px",
+    // });
+
+    $(itemElement).animate({
+      width: "100px",
+      // height: "100px",
     });
+
+    $(iconElement).animate({
+      right: "0rem",
+    });
+
     $(titleElement).animate({
       opacity: "0",
     });
@@ -130,6 +152,7 @@ p {
     align-items: center;
     position: relative;
   }
+
   .item {
     display: flex;
     flex-direction: column;
@@ -157,6 +180,7 @@ p {
   h3 {
     position: absolute;
     opacity: 0;
+    z-index: 1;
   }
 
   .details {

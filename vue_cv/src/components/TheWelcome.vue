@@ -32,9 +32,7 @@ import VueIcon from "./icons/IconVue.vue";
         <SymfonyIcon />
       </template>
       <template #heading>Symfony</template>
-      <template #content
-        >Cliquez sur cette boite pour voir un projet utilisant Symfony!
-      </template>
+      <template #content>Voir un projet utilisant Symfony! </template>
     </WelcomeItem>
   </a>
 
@@ -48,9 +46,7 @@ import VueIcon from "./icons/IconVue.vue";
         <TypescriptIcon />
       </template>
       <template #heading>TypeScript</template>
-      <template #content
-        >Cliquez sur cette boite pour voir un projet utilisant TypeScript!
-      </template>
+      <template #content>Voir un projet utilisant TypeScript </template>
     </WelcomeItem>
   </a>
 
@@ -64,9 +60,7 @@ import VueIcon from "./icons/IconVue.vue";
         <NodeIcon />
       </template>
       <template #heading>Node Js</template>
-      <template #content
-        >Cliquez sur cette boite pour voir un projet utilisant Node!
-      </template>
+      <template #content>Voir un projet utilisant Node! </template>
     </WelcomeItem>
   </a>
 
@@ -76,9 +70,7 @@ import VueIcon from "./icons/IconVue.vue";
         <VueIcon />
       </template>
       <template #heading>Vue</template>
-      <template #content
-        >Cliquez sur cette boite pour voir un projet utilisant Vue!
-      </template>
+      <template #content>Voir un projet utilisant Vue! </template>
     </WelcomeItem>
   </a>
 </template>
