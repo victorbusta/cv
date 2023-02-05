@@ -1,69 +1,40 @@
 <script setup lang="ts">
-import $ from "jquery";
-
-var opened = 0;
-var iconElement = new EventTarget();
-
-const hoveringIcon = (event: Event) => {
-  if (opened === 0 && event.currentTarget !== null) {
-    opened = 1;
-    iconElement = $(event.target);
-    console.log(iconElement);
-
-    $(iconElement).animate({
-      rotate: "360deg",
-    });
-  }
-};
-
-const exitingCard = (event: Event) => {
-  if (opened === 1 && event.currentTarget !== null) {
-    opened = 0;
-    $(iconElement).animate({
-      rotate: "0deg",
-    });
-  }
-};
+defineProps<{
+  link: string;
+}>();
 </script>
 
 <template>
-  <div class="item">
-    <i @mouseleave="exitingCard($event)" @mouseover="hoveringIcon($event)">
-      <slot name="icon"></slot>
-    </i>
-  </div>
+  <a v-bind:href="link" target="_blank">
+    <slot name="icon"></slot>
+  </a>
 </template>
 
 <style scoped>
-i {
+.item {
+  width: 48px;
+  height: 48px;
   display: flex;
-  place-items: center;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-  color: var(--color-text);
+  justify-content: center;
+  align-content: center;
+  border: 1px;
+  border-style: solid;
+}
+
+a {
+  width: 48px;
+  height: 48px;
   margin: 1rem;
-  transition: transform 1.5s ease;
-  transition: all 1.5 ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 16px;
+  background: #2a2d34;
+  box-shadow: 5px 5px 10px #1d1f24, -5px -5px 10px #373b44;
 }
 
-.spin {
-  transform: rotateY(360deg);
-}
-
-@media (min-width: 1024px) {
-  i {
-    top: calc(50% - 25px);
-    position: relative;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-  }
+a:active {
+  box-shadow: inset 5px 5px 10px #1d1f24, inset -5px -5px 10px #373b44;
 }
 </style>

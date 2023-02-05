@@ -1,11 +1,14 @@
 @import './base.css';
 
 #app {
-  max-width: 1680px;
-  margin: 0 auto;
-  padding: 2rem;
-
+  width: 100%;
+  min-height: 100vh;
   font-weight: normal;
+  display: grid;
+  grid-template-rows: 0; 
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 a,
@@ -27,18 +30,5 @@ a,
 @media (hover: hover) {
   a:hover {
     background-color: #8d86c937;
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
   }
 }
