@@ -8,7 +8,7 @@ import VueIcon from "./icons/IconVue.vue";
 </script>
 
 <template>
-  <SkillItem link="">
+  <SkillItem link="https://fr.wikipedia.org/wiki/Devops">
     <template #icon>
       <DevopsIcon />
     </template>

@@ -14,7 +14,7 @@ defineProps<{
         <slot name="heading" ref="heading"></slot>
       </h2>
     </div>
-    <a href="{{ link }}" target="_blank">
+    <a v-bind:href="link" target="_blank">
       <p>
         <slot name="content"></slot>
       </p>
@@ -26,12 +26,12 @@ defineProps<{
 div .content {
   display: grid;
   grid-template-rows: 32px auto;
-  width: 90%;
   margin-bottom: 64px;
   border-radius: 20px;
 }
 
 a {
+  margin-top: 10px;
   border-radius: 6px;
   background: #2a2d34;
   box-shadow: 2px 2px 5px #1d1f24, -2px -2px 5px #373b44;
@@ -54,7 +54,14 @@ div .header {
 }
 
 i {
-  box-shadow: 16px 16px 32px #212329, -16px -16px 32px #33373f;
+  height: 32px;
+  width: 32px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #2a2d34;
+  box-shadow: inset 3px 3px 6px #1d1f24, inset -3px -3px 6px #373b44;
 }
 
 h2 {

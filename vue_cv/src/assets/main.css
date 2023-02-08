@@ -1,14 +1,10 @@
 @import './base.css';
 
 #app {
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
-  font-weight: normal;
   display: grid;
-  grid-template-rows: 0; 
-  grid-gap: 10px;
-  justify-content: center;
-  align-items: center;
+  justify-items: center;
 }
 
 a,

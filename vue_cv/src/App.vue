@@ -1,225 +1,207 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import * as anim from "./utils/utils.animation";
 
-const navRadius = 64;
+const diametre = 64;
+const bubbleDiameter = 384;
 
-var opened = false;
-var lastPos = 0;
+var navLinks: Element[];
+var navOpened = false;
+var position = 0;
 
-const showNav = async () => {
-  if (window.innerWidth <= 768) {
-    const linkElements = Array.from(document.querySelectorAll("nav > a"));
-
-    if (opened) {
-      closeNav(linkElements);
-    } else {
-      openNav(linkElements);
-    }
-    opened = !opened;
+function navigate() {
+  navLinks = Array.from(document.querySelectorAll("nav > a"));
+  if (!navOpened) {
+    openNav();
+  } else {
+    closeNav();
   }
-};
 
-function closeNav(linkElements: Element[]) {
-  lastPos = 0;
+  navOpened = !navOpened;
+}
 
+function openNav() {
+  position = 0;
   openBurger();
-
-  linkElements.forEach(async (element) => {
-    element.animate(
-      [
-        {
-          transform: `translate(${
-            2 * navRadius * Math.cos(degToRad(lastPos)) - 64
-          }px)`,
-        },
-      ],
-      {
-        duration: 100,
-        fill: "forwards",
-      }
+  openBubble();
+  navLinks.forEach(async (el) => {
+    anim.translateEl(el, "64px", "0px");
+    await anim.delay(150);
+    anim.hideEl(el, false);
+    anim.translateEl(
+      el,
+      `${diametre * Math.cos(anim.degToRad(position))}px`,
+      `${diametre * Math.PI * Math.sin(anim.degToRad(position))}px`,
+      150
     );
-    element.animate([{ opacity: 0 }], {
-      duration: 300,
-      fill: "forwards",
-    });
-    await delay(100);
-    element.animate([{ transform: "translate(0)" }], {
-      duration: 100,
-      fill: "forwards",
-    });
+    anim.rotateEl(el, `${position}deg`);
+    position += 15;
   });
 }
 
-function openNav(linkElements: Element[]) {
-  lastPos = 0;
-
+async function closeNav() {
+  position = 0;
   closeBurger();
-
-  linkElements.forEach(async (element) => {
-    element.animate(
-      [
-        {
-          transform: `translateX(${
-            2 * navRadius * Math.cos(degToRad(lastPos)) - 64
-          }px)`,
-        },
-      ],
-      {
-        duration: 100,
-        fill: "forwards",
-      }
+  navLinks.forEach(async (el) => {
+    anim.hideEl(el, true, 100);
+    anim.translateEl(
+      el,
+      `${diametre * Math.cos(anim.degToRad(position))}px`,
+      `${diametre * Math.PI * Math.sin(anim.degToRad(-position))}px`,
+      150
     );
-
-    element.animate([{ opacity: 1 }], {
-      duration: 300,
-      fill: "forwards",
-    });
-
-    await delay(100);
-
-    element.animate(
-      [
-        {
-          transform: `translate(${
-            2 * navRadius * Math.cos(degToRad(lastPos)) - 64
-          }px, -${2 * navRadius * Math.sin(degToRad(lastPos))}px)
-    rotate(-${lastPos}deg)`,
-        },
-      ],
-      {
-        duration: 300,
-        fill: "forwards",
-      }
-    );
-
-    lastPos += 35;
+    anim.rotateEl(el, `-${position}deg`);
+    await anim.delay(150);
+    anim.translateEl(el, "64px", "-56px");
+    position += 20;
   });
+  await anim.delay(150);
+
+  closeBubble();
 }
 
-function closeBurger() {
-  document.querySelector(".line1")?.animate([{ opacity: 0 }], {
-    duration: 100,
-    fill: "forwards",
-  });
-  document.querySelector(".line2")?.animate([{ rotate: "45deg" }], {
-    duration: 300,
-    fill: "forwards",
-  });
-  document.querySelector(".line3")?.animate(
-    [
-      {
-        transform: `translate(0px, -11px)
-    rotate(-45deg)`,
-      },
-    ],
-    {
-      duration: 300,
-      fill: "forwards",
-    }
+function openBubble() {
+  anim.resize(".navBack", `${bubbleDiameter}px`, `${bubbleDiameter}px`);
+  anim.translate(
+    ".navBack",
+    `-${bubbleDiameter / 2 - (diametre / 2 + 4)}px`,
+    `-${bubbleDiameter / 2 - (diametre / 2 + 4)}px`
   );
 }
 
-function openBurger() {
-  document.querySelector(".line1")?.animate([{ opacity: 1 }], {
-    duration: 300,
-    fill: "forwards",
-  });
-  document.querySelector(".line2")?.animate([{ rotate: "0deg" }], {
-    duration: 100,
-    fill: "forwards",
-  });
-  document.querySelector(".line3")?.animate(
-    [
-      {
-        transform: `translate(0px)
-    rotate(0)`,
-      },
-    ],
-    {
-      duration: 100,
-      fill: "forwards",
-    }
-  );
+function closeBubble() {
+  anim.resize(".navBack", `${diametre}px`, `${diametre}px`);
+  anim.translate(".navBack", `+${0}px`, `+${0}px`);
 }
 
-const degToRad = (deg: number) => deg * (Math.PI / 180);
+async function openBurger() {
+  anim.translateY(".line1", "0");
+  anim.translateY(".line3", "0");
+  anim.hide(".line2", true, 100);
+  await anim.delay(150);
+  anim.rotate(".line1", "45deg");
+  anim.rotate(".line3", "-45deg");
+}
 
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+async function closeBurger() {
+  anim.rotate(".line1", "0deg");
+  anim.rotate(".line3", "0deg");
+  await anim.delay(150);
+  anim.hide(".line2", false);
+  anim.translateY(".line1", "-10px");
+  anim.translateY(".line3", "10px");
 }
 </script>
 
 <template>
+  <div class="navBack"></div>
   <nav>
-    <RouterLink to="/" @click="showNav()"><h2>Contact</h2></RouterLink>
-    <RouterLink to="/skills" @click="showNav()"
-      ><h2>Compétences</h2></RouterLink
+    <RouterLink :to="{ name: 'contact' }" @click="navigate"
+      ><h3>Contact</h3></RouterLink
     >
-    <RouterLink to="/about" @click="showNav()"
-      ><h2>Présentation</h2></RouterLink
+    <RouterLink :to="{ name: 'skills' }" @click="navigate"
+      ><h3>Compétences</h3></RouterLink
     >
-    <div class="burger" @click="showNav()">
-      <span class="line line1"></span>
-      <span class="line line2"></span>
-      <span class="line line3"></span>
+    <RouterLink :to="{ name: 'about' }" @click="navigate"
+      ><h3>Présentation</h3></RouterLink
+    >
+    <div class="burgerContainer">
+      <div class="burger" @click="navigate">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+        <span class="line line3"></span>
+      </div>
     </div>
   </nav>
 
   <content>
-    <RouterView />
+    <div class="content"><RouterView /></div>
   </content>
 </template>
 
 <style scoped>
-.blur {
-  z-index: 0;
-  filter: blur(2px);
-}
-
-h2 {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-div {
-  display: none;
-}
-
 content {
-  height: auto;
-  width: fit-content;
-  margin: 10px 10px;
+  width: 90%;
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 72px calc(100vh - 88px);
+}
+
+.content {
   grid-row: 2;
-  justify-content: center;
+  width: 90%;
+  display: grid;
   align-items: center;
-  display: flex;
-  flex-direction: column;
 }
 
 nav {
   position: fixed;
-  z-index: 1;
-  height: 3rem;
-  top: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  top: 4px;
+  left: 4px;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  display: grid;
   align-items: center;
-  column-gap: 0.875rem;
-  /* transition: left 1s ease; */
+  /* justify-items: center; */
+  grid-template-columns: 100%;
+  grid-gap: 0px;
+  z-index: 2;
+}
+
+.navBack {
+  position: fixed;
+  top: 4px;
+  left: 4px;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  background: #2a2d34;
+  box-shadow: 6px 6px 13px #1d1f24, -6px -6px 13px #373b44;
+  z-index: 2;
+}
+
+.burgerContainer {
+  position: fixed;
+  top: 4px;
+  left: 4px;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  background: #2a2d34;
+  box-shadow: 6px 6px 13px #1d1f24, -6px -6px 13px #373b44;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 100%;
+  grid-gap: 0px;
+}
+
+nav:active {
+  box-shadow: inset 6px 6px 13px #1d1f24, inset -6px -6px 13px #373b44;
 }
 
 nav a {
-  position: relative;
-  text-align: center;
-  background: #2a2d34;
+  grid-row: 1;
+  grid-column: 1;
+  left: 32px;
+  position: absolute;
+  display: grid;
+  width: fit-content;
+  align-content: center;
+  opacity: 0;
   border-radius: 16px;
   background: #2a2d34;
   box-shadow: 4px 4px 7px #1d1f24, -4px -4px 7px #373b44;
+  transform: translate(64px, -56px);
 }
 
 nav a:active {
   box-shadow: inset 4px 4px 7px #1d1f24, inset -4px -4px 7px #373b44;
+}
+
+h3 {
+  margin: 4px 8px 4px 8px;
 }
 
 .router-link-active {
@@ -227,73 +209,31 @@ nav a:active {
   box-shadow: inset 4px 4px 7px #1d1f24, inset -4px -4px 7px #373b44;
 }
 
-@media screen and (min-width: 768px) {
-  nav a {
-    opacity: 1;
-  }
+div .burger {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 4px;
+  background: #2a2d34;
+  z-index: 1;
 }
 
-@media screen and (max-width: 768px) {
-  nav {
-    position: fixed;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-gap: 0px;
-    top: 90%;
-    width: 75px;
-    z-index: 1;
-  }
+.line {
+  height: 16%;
+  width: 100%;
+  position: absolute;
+  background-color: #ebebeba3;
+  border-radius: 3px;
+}
 
-  .navhider {
-    grid-row: 1;
-    grid-column: 1;
-    display: block;
-    height: 140%;
-    width: 100%;
-    background: #2a2d34;
-    z-index: 1;
-  }
+.line1 {
+  transform: translateY(-10px);
+}
 
-  nav a {
-    width: max-content;
-    grid-row: 1;
-    grid-column: 1;
-    opacity: 0;
-    text-align: center;
-    z-index: 0;
-    left: 32px;
-  }
-
-  div .burger {
-    grid-row: 1;
-    grid-column: 1;
-    right: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
-    border-radius: 128px;
-    background: #2a2d34;
-    box-shadow: 6px 6px 13px #1d1f24, -6px -6px 13px #373b44;
-    height: 64px;
-    width: 64px;
-    left: 2px;
-    z-index: 2;
-  }
-
-  div .burger:active {
-    box-shadow: inset 6px 6px 13px #1d1f24, inset -6px -6px 13px #373b44;
-  }
-
-  .line {
-    height: 5px;
-    width: 32px;
-    background-color: #ebebeba3;
-    border-radius: 3px;
-    margin: 3px;
-    filter: drop-shadow(0 0 0.1rem #000000);
-  }
+.line3 {
+  transform: translateY(10px);
 }
 </style>
