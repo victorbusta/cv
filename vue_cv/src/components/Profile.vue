@@ -61,36 +61,5 @@ function delay(ms: number) {
 </template>
 
 <style scoped>
-img {
-  margin-top: 10px;
-  border-radius: 50%;
-  background: #2a2d34;
-  box-shadow: 13px 13px 26px #1d1f24, -13px -13px 26px #373b44;
-}
 
-h1,
-h2 {
-  text-align: center;
-  margin: 0 10px 0 10px;
-  text-shadow: 0px 0px 4px #000000;
-}
-.greetings {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-a {
-  margin-top: 10px;
-}
-
-.contact {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  column-gap: 5px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
 </style>

@@ -4,27 +4,20 @@
   width: 100vw;
   min-height: 100vh;
   display: grid;
-  justify-items: center;
+  grid-template-rows: 64px 64px calc(100vh - 192px) 64px;
+  grid-template-columns: 64px calc(100vw - 128px) 64px;
 }
 
 a,
 .purple {
   text-decoration: none;
-  color: #8D86C9;
+  color: var(--color-background-bis);
   transition: 0.4s;
   border-radius: 5px;
 }
 
-a,
-.gray {
-  text-decoration: none;
-  color: #CAC4CE;
-  transition: 0.4s;
-  border-radius: 5px; 
-}
-
 @media (hover: hover) {
   a:hover {
-    background-color: #8d86c937;
+    background-color: var(--color-text-hover);
   }
 }
