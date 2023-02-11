@@ -110,7 +110,7 @@ async function closeBuger() {
     </div>
   </nav>
 
-  <div class="index"><h1 class="head">Contact</h1></div>
+  <!-- <div class="index"><h1 class="head">Contact</h1></div> -->
 
   <content>
     <div class="view"><RouterView /></div>
