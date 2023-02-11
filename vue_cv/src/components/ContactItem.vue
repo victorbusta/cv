@@ -11,4 +11,9 @@ defineProps<{
 </template>
 
 <style scoped>
+a {
+  margin: 8px;
+  height: 100%;
+  width: 100%;
+}
 </style>

@@ -31,7 +31,10 @@ function delay(ms: number) {
       width="128"
       height="128"
     />
-    <h1 class="purple">Victor Santos de Bustamante</h1>
+    <h1 class="purple">
+      Victor <br />
+      Santos de Bustamante
+    </h1>
     <h2 class="gray">Développeur Fullstack</h2>
     <a id="mail" @click="copy()">victor.sdbustamante@gmail.com</a>
     <div class="contact">
@@ -61,5 +64,31 @@ function delay(ms: number) {
 </template>
 
 <style scoped>
+.greetings {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: space-evenly;
+  align-items: center;
+  border-width: 1px;
+  border-color: var(--color-background-bis);
+  border-style: solid;
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+}
 
+img {
+  margin-top: 8px;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin: 8px;
+}
+
+.contact {
+  margin: 8px;
+}
 </style>

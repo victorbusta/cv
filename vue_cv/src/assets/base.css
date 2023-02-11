@@ -2,7 +2,10 @@
 :root {
   --color-background: #2a2d34;
   --color-background-bis: #8D86C9;
-  --color-background-ter: #c49ee5;
+
+  --color-nav: #c49ee5;
+  --color-nav-bis: #cdb7d1;
+  --color-nav-ter: #d2c4c7;
 
 
   --color-heading: #d6d0bc;

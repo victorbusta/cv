@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>
+    <p>
       Fort de quatre années d'expérience dans l'informatique dont deux comme
       développeur web, j'ai à cœur de répondre aux besoins de mes clients et de
       mener jusqu'à leur terme les projets qui me sont confiés.<br /><br />
@@ -14,8 +14,21 @@
       Je travaille avec passion, envie et suis très concerné par l'actualité des
       technologies. Je saurai me doter de nouveaux outils nécessaires à la
       réalisation de vos projets.
-    </h3>
+    </p>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+div {
+  border-width: 1px;
+  border-color: var(--color-background-bis);
+  border-style: solid;
+  border-radius: 8px;
+}
+
+div p {
+  margin: 8px;
+  /* text-align: justify; */
+  /* text-justify: inter-word; */
+}
+</style>

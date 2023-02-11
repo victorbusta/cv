@@ -16,27 +16,54 @@ function navAnimation() {
 
 async function openNav() {
   openBurger();
-  // anim.rotate("nav", "45deg");
+
   anim.translate("nav", "0px", "0px");
   anim.resize("nav", "384px", "384px");
-  // openLinks();
-  anim.translate(".link", "96px", "-96px");
-  await anim.delay(300);
-  anim.rotate(".link", "30deg");
-  // anim.translate("nav", "16px", "16px");
+
+  openLinks();
 }
 
 async function closeNav() {
   closeBuger();
-  // closeLinks();
-  anim.rotate(".link", "0deg");
+  closeLinks();
+
   await anim.delay(300);
-  anim.translate(".link", "64px", "-160px");
 
   anim.translate("nav", "24px", "24px");
   anim.resize("nav", "256px", "256px");
+}
 
-  // anim.translate("nav", "0px", "0px");
+async function openLinks() {
+  const links = document.querySelectorAll(".link");
+
+  var angle = 0;
+
+  links.forEach(async (link) => {
+    anim.translateEl(link, "96px", "-96px");
+
+    await anim.delay(300);
+
+    // anim.hideEl(link, false, 0);
+    anim.rotateEl(link, `${angle}deg`);
+    angle += 25;
+  });
+
+  await anim.delay(300);
+}
+
+async function closeLinks() {
+  const links = document.querySelectorAll(".link");
+
+  links.forEach(async (link) => {
+    anim.rotateEl(link, "0deg");
+
+    await anim.delay(300);
+
+    // anim.hideEl(link, true, 0);
+    anim.translateEl(link, "64px", "-160px");
+  });
+
+  await anim.delay(300);
 }
 
 async function openBurger() {
@@ -57,30 +84,33 @@ async function closeBuger() {
   anim.rotate(".burger", "-180deg", 450);
 
   await anim.delay(300);
-  anim.hide(".line2", false);
 
+  anim.hide(".line2", false);
   anim.translateY(".line1", "16px");
   anim.translateY(".line3", "-16px");
 }
 </script>
 
 <template>
-  <div class="burger">
+  <div class="burger" @click="navAnimation">
     <span class="line line1"></span>
     <span class="line line2"></span>
     <span class="line line3"></span>
   </div>
   <nav @click="navAnimation">
-    <div class="link">
-      <RouterLink :to="{ name: 'contact' }">Contact</RouterLink>
+    <!-- <div class="link link0"></div> -->
+    <div class="link link1">
+      <RouterLink :to="{ name: 'contact' }"><h3>Contact</h3></RouterLink>
     </div>
-    <div class="link">
-      <RouterLink :to="{ name: 'skills' }">Compétences</RouterLink>
+    <div class="link link2">
+      <RouterLink :to="{ name: 'skills' }"><h3>Compétences</h3></RouterLink>
     </div>
-    <div class="link">
-      <RouterLink :to="{ name: 'about' }">Présentation</RouterLink>
+    <div class="link link3">
+      <RouterLink :to="{ name: 'about' }"><h3>Présentation</h3></RouterLink>
     </div>
   </nav>
+
+  <div class="index"><h1 class="head">Contact</h1></div>
 
   <content>
     <div class="view"><RouterView /></div>
@@ -88,6 +118,18 @@ async function closeBuger() {
 </template>
 
 <style scoped>
+.index {
+  grid-row: 2;
+  grid-column: 2;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+h1 {
+  text-align: center;
+}
+
 content {
   grid-row: 3;
   grid-column: 2;
@@ -96,62 +138,92 @@ content {
   display: grid;
   justify-items: center;
   align-items: center;
-  z-index: -1;
+  z-index: 1;
 }
 
 div .view {
   width: calc(100% - 20px);
   height: calc(100% - 20px);
-  display: grid;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 
 nav {
   position: fixed;
   display: grid;
-  width: 256px;
-  height: 256px;
+  /* width: 256px;
+  height: 256px; */
   top: -152px;
   left: -152px;
   border-radius: 50%;
-  background-color: var(--color-background-bis);
+  /* background-color: var(--color-background); */
   align-items: center;
   transform: translate(24px, 24px);
+  z-index: 2;
   /* transition: all 0.5s cubic-bezier(1, -1.03, 0, 1.92); */
 }
 
 .link {
   position: fixed;
   height: 192px;
-  width: 193px;
-  border-radius: 0 192px 0 0;
-  background-color: var(--color-background);
+  width: 192px;
+  border-radius: 0 198px 0 0;
   top: 96px;
   left: 96px;
-  z-index: 1;
+  opacity: 1;
   text-align: center;
   transform: translate(64px, -160px);
 }
 
 .link a {
   width: 100%;
+  height: 100%;
   right: 0;
+  border-radius: 0 100% 0 0;
   position: absolute;
   z-index: 1;
-  color: black;
-  bottom: 0px;
+}
+
+/* .link0 {
+  z-index: 5;
+  background-color: var(--color-background);
+  height: 193px;
+  width: 193px;
+} */
+.link1 {
+  z-index: 4;
+  background-color: var(--color-nav);
+}
+.link2 {
+  z-index: 3;
+  background-color: var(--color-nav-bis);
+}
+.link3 {
+  z-index: 2;
+  background-color: var(--color-nav-ter);
+}
+
+h3 {
+  position: absolute;
+  bottom: 0;
+  width: 160px;
+  right: 0px;
+  color: var(--color-background);
 }
 
 div .burger {
   position: fixed;
   width: 48px;
   height: 48px;
+  background-color: var(--color-background);
+  border-radius: 50%;
   top: 16px;
   left: 16px;
   display: grid;
   align-items: center;
-  z-index: 1;
+  z-index: 5;
 }
 
 .line {
@@ -160,7 +232,7 @@ div .burger {
   width: 100%;
   border-radius: 4px;
   display: block;
-  background-color: var(--color-background);
+  background-color: var(--color-background-bis);
 }
 
 .line1 {
