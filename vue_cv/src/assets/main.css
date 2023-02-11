@@ -4,7 +4,7 @@
   width: 100vw;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 64px 64px calc(100vh - 192px) 64px;
+  grid-template-rows: 64px calc(100vh - 192px) 64px;
   grid-template-columns: 64px calc(100vw - 128px) 64px;
 }
 

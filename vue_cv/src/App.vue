@@ -131,7 +131,7 @@ h1 {
 }
 
 content {
-  grid-row: 3;
+  grid-row: 2;
   grid-column: 2;
   width: 100%;
   height: 100%;
