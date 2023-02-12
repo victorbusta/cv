@@ -36,7 +36,7 @@ function delay(ms: number) {
       Santos de Bustamante
     </h1>
     <h2 class="gray">Développeur Fullstack</h2>
-    <a id="mail" @click="copy()">victor.sdbustamante@gmail.com</a>
+    <a id="mail" @click="copy()">victor.sdbustamante<wbr />@gmail.com</a>
     <div class="contact">
       <ContactItem
         link="mailto:victor.sdbustamante@gmail.com?subject=Prise de contact"
@@ -74,12 +74,17 @@ function delay(ms: number) {
   border-color: var(--color-background-bis);
   border-style: solid;
   border-radius: 8px;
-  height: 100%;
-  width: 100%;
+  height: calc(100vh - 64px);
+  width: fit-content;
+}
+
+a {
+  width: calc(100% - 16px);
+  text-align: center;
+  /* word-wrap: break-word; */
 }
 
 img {
-  margin-top: 8px;
 }
 
 h1,

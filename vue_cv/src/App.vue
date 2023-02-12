@@ -217,10 +217,11 @@ div .burger {
   position: fixed;
   width: 48px;
   height: 48px;
-  background-color: var(--color-background);
+  /* background-color: var(--color-background); */
   border-radius: 50%;
   top: 16px;
   left: 16px;
+  opacity: 1;
   display: grid;
   align-items: center;
   z-index: 5;
